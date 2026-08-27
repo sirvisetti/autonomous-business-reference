@@ -1,6 +1,9 @@
-# Autonomous Business Reference
+# Autonomous Business Reference (ABR)
 
 A lightweight, non-normative reference implementation of the **Autonomous Business Capability Specification (ABCS)**, part of the **Autonomous Business Standard (ABS)** project.
+
+**Public site:** https://abr.sirvisetti.com  
+**ABS / ABCS:** https://abs.sirvisetti.com
 
 > **Non-normative.** This repository demonstrates one way to implement ABCS. Conformance is defined by the ABCS specification and canonical contracts in `sirvisetti/autonomous-business-standard`, not by this code.
 
@@ -30,7 +33,9 @@ Then open the local URL and try the Playground.
 
 ABS site: https://abs.sirvisetti.com
 
-Normative specification: Autonomous Business Capability Specification (ABCS) Draft 0.2.
+Normative specification: **Autonomous Business Capability Specification (ABCS) Draft 0.2**.
+
+ABR depends on ABCS. ABCS does not depend on ABR.
 
 ## License
 
