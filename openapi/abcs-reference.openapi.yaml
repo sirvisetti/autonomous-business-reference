@@ -6,6 +6,9 @@ info:
     Non-normative HTTP reference for ABCS Discover, Describe and Invoke semantics.
     ABCS itself is transport-neutral; the normative specification is published by the
     Autonomous Business Standard project at https://abs.sirvisetti.com.
+servers:
+  - url: https://abr.sirvisetti.com
+    description: Public Autonomous Business Reference (ABR)
 paths:
   /capabilities:
     get:
