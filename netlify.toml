@@ -1,0 +1,15 @@
+[build]
+  publish = "."
+
+[functions]
+  directory = "netlify/functions"
+
+[[redirects]]
+  from = "/capabilities/:id"
+  to = "/.netlify/functions/capabilities?id=:id"
+  status = 200
+
+[[redirects]]
+  from = "/capabilities"
+  to = "/.netlify/functions/capabilities"
+  status = 200

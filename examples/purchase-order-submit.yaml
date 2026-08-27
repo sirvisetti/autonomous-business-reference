@@ -1,0 +1,17 @@
+abcs: "0.2"
+capability: procurement.purchase-order.submit
+requestId: example-po-001
+payload:
+  number: "4500012345"
+  orderDate: "2026-08-27"
+  buyer: {id: "urn:example:buyer", type: organization}
+  supplier: {id: "urn:example:supplier", type: organization}
+  currency: USD
+  lines:
+    - lineNumber: 1
+      quantity: {value: 10, unit: EA}
+  status:
+    lifecycle: draft
+    approval: not-submitted
+    fulfillment: not-received
+    invoicing: not-invoiced

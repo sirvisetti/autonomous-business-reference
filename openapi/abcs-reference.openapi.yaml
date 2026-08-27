@@ -1,0 +1,45 @@
+openapi: 3.1.0
+info:
+  title: Autonomous Business Reference HTTP Binding
+  version: 0.1.0
+  description: >-
+    Non-normative HTTP reference for ABCS Discover, Describe and Invoke semantics.
+    ABCS itself is transport-neutral; the normative specification is published by the
+    Autonomous Business Standard project at https://abs.sirvisetti.com.
+paths:
+  /capabilities:
+    get:
+      summary: Discover supported canonical capabilities
+      responses:
+        '200':
+          description: Reference capability catalog
+    post:
+      summary: Invoke a canonical capability
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [abcs, capability, requestId, payload]
+              properties:
+                abcs: {type: string, const: '0.2'}
+                capability: {type: string}
+                requestId: {type: string}
+                from: {type: object}
+                to: {type: object}
+                payload: {}
+      responses:
+        '200': {description: Canonical ABCS response}
+        '422': {description: Canonical payload rejected by the reference validator}
+  /capabilities/{capability}:
+    get:
+      summary: Describe a supported canonical capability
+      parameters:
+        - in: path
+          name: capability
+          required: true
+          schema: {type: string}
+      responses:
+        '200': {description: Capability description with normative links}
+        '404': {description: Capability not supported by this reference surface}
