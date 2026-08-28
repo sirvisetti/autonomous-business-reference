@@ -1,0 +1,52 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Autonomous Business Reference (ABR) capability API
+
+Resources:
+  ReferenceApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      CorsConfiguration:
+        AllowOrigins:
+          - '*'
+        AllowHeaders:
+          - content-type
+        AllowMethods:
+          - GET
+          - POST
+          - OPTIONS
+
+  CapabilityFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: .
+      Handler: capabilities.handler
+      Runtime: nodejs24.x
+      Architectures:
+        - arm64
+      MemorySize: 128
+      Timeout: 5
+      Events:
+        Discover:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ReferenceApi
+            Path: /capabilities
+            Method: GET
+        Invoke:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ReferenceApi
+            Path: /capabilities
+            Method: POST
+        Describe:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref ReferenceApi
+            Path: /capabilities/{capability}
+            Method: GET
+
+Outputs:
+  ReferenceApiUrl:
+    Description: Base URL for the ABR reference API
+    Value: !Sub 'https://${ReferenceApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}'
