@@ -12,22 +12,50 @@ A lightweight, non-normative reference implementation of the **Autonomous Busine
 - Make ABCS understandable in minutes.
 - Demonstrate Discover, Describe, Invoke, and canonical response semantics.
 - Validate and exercise representative canonical business payloads.
-- Stay small enough to read, fork, and deploy without infrastructure.
-- Run on Netlify using static files and one lightweight serverless function.
+- Stay small enough to read, fork, and deploy with minimal infrastructure.
+- Keep hosting and runtime technology separate from the ABCS business contract.
+
+## Architecture
+
+ABR intentionally stays tiny:
+
+- Static HTML, CSS and JavaScript hosted with AWS Amplify Hosting.
+- One lightweight AWS Lambda function behind Amazon API Gateway for the `/capabilities` reference API.
+- AWS SAM infrastructure definition in `aws/template.yaml`.
+- OpenAPI description of the optional HTTP binding.
+- No database, workflow engine, message broker, agent framework or ERP adapter.
+
+The browser and OpenAPI contract use the stable public paths:
+
+```text
+GET  /capabilities
+GET  /capabilities/{capability}
+POST /capabilities
+```
 
 ## What it is not
 
 This is not Sirvisetti Autonomy and is not a production platform. It intentionally excludes ERP adapters, workflow engines, message brokers, identity products, databases, agents, schedulers, and other runtime infrastructure.
 
-## Local development
+## Build and local checks
 
-Use Netlify CLI:
+The website build has no third-party dependencies:
 
 ```bash
-netlify dev
+npm run check
+npm run build
 ```
 
-Then open the local URL and try the Playground.
+The generated static site is written to `dist/`.
+
+To exercise the API locally with AWS SAM:
+
+```bash
+sam build --template-file aws/template.yaml
+sam local start-api --template-file .aws-sam/build/template.yaml
+```
+
+See `DEPLOYMENT.md` for the AWS deployment and Amplify reverse-proxy configuration.
 
 ## Standard
 
