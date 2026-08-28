@@ -1,0 +1,10 @@
+{
+  "name": "autonomous-business-reference",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Lightweight non-normative reference implementation of ABCS.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check": "node --check assets/app.js && node --check scripts/build.mjs && node --check aws/capabilities.mjs"
+  }
+}
