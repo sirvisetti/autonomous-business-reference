@@ -1,7 +1,7 @@
 import { cp, copyFile, mkdir, rm } from 'node:fs/promises';
 
 const output = 'dist';
-const files = ['index.html', 'http.html', 'playground.html', 'LICENSE.md'];
+const files = ['index.html', 'http.html', 'playground.html', 'robots.txt', 'sitemap.xml', 'LICENSE.md'];
 const directories = ['assets', 'examples', 'openapi'];
 
 await rm(output, { recursive: true, force: true });
